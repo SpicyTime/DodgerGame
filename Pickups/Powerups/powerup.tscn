@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3j33ale2g5kx"]
+
+[ext_resource type="PackedScene" uid="uid://bwlt157v5cce4" path="res://Pickups/pickup.tscn" id="1_u2wke"]
+[ext_resource type="Script" uid="uid://cjruvwb1ceqgd" path="res://Pickups/Powerups/powerup.gd" id="2_4u682"]
+
+[node name="Powerup" instance=ExtResource("1_u2wke")]
+script = ExtResource("2_4u682")
+type = 0
+duration = 5.0

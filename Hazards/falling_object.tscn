@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://x3ri41a3oqo8"]
+
+[ext_resource type="Script" uid="uid://b5vr0atxhfkky" path="res://Hazards/falling_object.gd" id="1_dnpmd"]
+[ext_resource type="Texture2D" uid="uid://bqca3n2yssy3h" path="res://icon.svg" id="1_xvv16"]
+[ext_resource type="PackedScene" uid="uid://dc1cgqelaeyah" path="res://Health System/hit_box.tscn" id="3_dnpmd"]
+[ext_resource type="PackedScene" uid="uid://d3yrxgpxob382" path="res://Health System/hurt_box.tscn" id="4_xvv16"]
+[ext_resource type="Script" uid="uid://d1fapdy7cnpeu" path="res://Health System/health.gd" id="5_153sd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnpmd"]
+radius = 65.2674
+
+[node name="FallingObject" type="Sprite2D"]
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("1_xvv16")
+script = ExtResource("1_dnpmd")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Hitbox" parent="." instance=ExtResource("3_dnpmd")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_dnpmd")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_xvv16")]
+collision_layer = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_dnpmd")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_153sd")
+health = 1
+metadata/_custom_type_script = "uid://d1fapdy7cnpeu"
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

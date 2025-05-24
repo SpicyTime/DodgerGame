@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddpf73hwjtrgw"]
+
+[ext_resource type="Texture2D" uid="uid://bqca3n2yssy3h" path="res://icon.svg" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://d2bjmjcqjwx7f" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="Script" uid="uid://d1fapdy7cnpeu" path="res://Health System/health.gd" id="4_k53q1"]
+[ext_resource type="PackedScene" uid="uid://d3yrxgpxob382" path="res://Health System/hurt_box.tscn" id="5_fhl08"]
+[ext_resource type="PackedScene" uid="uid://cd0rx1ebkxlyc" path="res://Weapons/gun.tscn" id="5_k53q1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(64, 63)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
+radius = 32.9848
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4ntmi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_4flbx")
+
+[node name="Gun" parent="." instance=ExtResource("5_k53q1")]
+position = Vector2(0, -64)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_k53q1")
+health = 3
+max_health = 3
+metadata/_custom_type_script = "uid://d1fapdy7cnpeu"
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_fhl08")]
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_k53q1")
