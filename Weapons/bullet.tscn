@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://drtoqxydmrrqc"]
 
 [ext_resource type="Script" uid="uid://b0jkq2kmn43ju" path="res://Weapons/bullet.gd" id="1_nx4t3"]
-[ext_resource type="Texture2D" uid="uid://bqca3n2yssy3h" path="res://icon.svg" id="2_jxno6"]
+[ext_resource type="Texture2D" uid="uid://bpjmpemg5hc7l" path="res://Assets/Sprites/Bullet.png" id="2_nx4t3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d5sa"]
 radius = 8.0
@@ -13,8 +13,7 @@ speed = 400
 metadata/_custom_type_script = "uid://hwyw5yg3tfch"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1875, 0.1875)
-texture = ExtResource("2_jxno6")
+texture = ExtResource("2_nx4t3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5d5sa")

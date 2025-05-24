@@ -10,7 +10,12 @@ func spawn_object():
 	var offset = randf_range(-max_x_offset, max_x_offset)
 	if GameManager.is_paused:
 		return
-	var object: Sprite2D = load("res://Hazards/falling_object.tscn").instantiate()
+	var rand = randf()
+	var object = null
+	if rand < 0.06:
+		object = load("res://Pickups/ammo_box.tscn").instantiate()
+	else:
+		object = load("res://Hazards/falling_object.tscn").instantiate()
 	object.position.x += offset
 	add_child(object)
 	

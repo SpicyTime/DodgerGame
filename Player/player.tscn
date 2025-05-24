@@ -1,29 +1,76 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddpf73hwjtrgw"]
+[gd_scene load_steps=14 format=3 uid="uid://ddpf73hwjtrgw"]
 
-[ext_resource type="Texture2D" uid="uid://bqca3n2yssy3h" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://d2bjmjcqjwx7f" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://br16b475hf82f" path="res://Assets/Sprites/Idle.png" id="2_fhl08"]
+[ext_resource type="Texture2D" uid="uid://gvk58ei2jpfr" path="res://Assets/Sprites/Walk.png" id="2_k53q1"]
 [ext_resource type="Script" uid="uid://d1fapdy7cnpeu" path="res://Health System/health.gd" id="4_k53q1"]
 [ext_resource type="PackedScene" uid="uid://d3yrxgpxob382" path="res://Health System/hurt_box.tscn" id="5_fhl08"]
 [ext_resource type="PackedScene" uid="uid://cd0rx1ebkxlyc" path="res://Weapons/gun.tscn" id="5_k53q1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(64, 63)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
+atlas = ExtResource("2_k53q1")
+region = Rect2(0, 0, 81, 162)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
-radius = 32.9848
+[sub_resource type="AtlasTexture" id="AtlasTexture_od3ui"]
+atlas = ExtResource("2_k53q1")
+region = Rect2(81, 0, 81, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00tjw"]
+atlas = ExtResource("2_k53q1")
+region = Rect2(162, 0, 81, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
+atlas = ExtResource("2_k53q1")
+region = Rect2(0, 162, 81, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3vf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fhl08")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtle1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od3ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00tjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3vf3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
+radius = 40.0
+height = 160.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhl08"]
+size = Vector2(48.048, 132.132)
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.666, 0.666)
 script = ExtResource("1_4ntmi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_onrkg")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x3vf3")
+animation = &"walk"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_4flbx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_k53q1")
 
 [node name="Gun" parent="." instance=ExtResource("5_k53q1")]
-position = Vector2(0, -64)
+position = Vector2(-24, -72)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_k53q1")
@@ -36,4 +83,5 @@ collision_mask = 2
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CircleShape2D_k53q1")
+position = Vector2(0, 6.006)
+shape = SubResource("RectangleShape2D_fhl08")
