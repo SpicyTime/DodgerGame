@@ -5,7 +5,7 @@ var speed = 600
 func _ready() -> void:
 	gravity_scale = 1
 
-func apply_effect(body):
+func apply_effect(_body):
 	pass
 
 

@@ -21,6 +21,12 @@ SignalBus="*res://Autoloads/signal_bus.gd"
 GameManager="*res://Game/game_manager.gd"
 Constants="*res://Autoloads/constants.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
 [global]
 
 unused_signal=false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddpf73hwjtrgw"]
+[gd_scene load_steps=15 format=3 uid="uid://ddpf73hwjtrgw"]
 
 [ext_resource type="Script" uid="uid://d2bjmjcqjwx7f" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://br16b475hf82f" path="res://Assets/Sprites/Idle.png" id="2_fhl08"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d1fapdy7cnpeu" path="res://Health System/health.gd" id="4_k53q1"]
 [ext_resource type="PackedScene" uid="uid://d3yrxgpxob382" path="res://Health System/hurt_box.tscn" id="5_fhl08"]
 [ext_resource type="PackedScene" uid="uid://cd0rx1ebkxlyc" path="res://Weapons/gun.tscn" id="5_k53q1"]
+[ext_resource type="AudioStream" uid="uid://b7aiykhbkghu1" path="res://Assets/Audio/SFX/Hurt.mp3" id="7_vtle1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
 atlas = ExtResource("2_k53q1")
@@ -85,3 +86,8 @@ health = NodePath("../Health")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 6.006)
 shape = SubResource("RectangleShape2D_fhl08")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_vtle1")
+volume_db = 1.5
+bus = &"SFX"

@@ -9,15 +9,19 @@ var gravity: float = 9.8
 var powerups = []
 var bullets: int = 500
 var gun_flipped 
+var coin_count: int = 0
 func add_health(amount):
 	powerups.append(Constants.PowerupType.HEALTH)
 	health.set_max_health(health.max_health + amount)
 	health.restore_health()
 func add_bullets(amount: int):
 	bullets += amount
+func add_coin():
+	coin_count += 1
 func _ready()-> void:
 	SignalBus.health_depleted.connect(_on_health_depleted)
 	gun_flipped = gun.position.x * -1
+	SignalBus.health_changed.connect(_on_health_changed)
 func _physics_process(delta: float) -> void:
 	if GameManager.is_paused:
 		return
@@ -52,7 +56,10 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.play("walk")
 	else:
 		animated_sprite_2d.play("idle")
-
+func _on_health_changed(diff, node):
+	if node == $Health:
+		if diff < 0:
+			$HurtSFX.play()
 func _on_health_depleted(health_object):
 	if health_object == $Health:
 		queue_free()

@@ -6,8 +6,9 @@ extends Node
 func restore_health():
 	set_health(max_health)
 func set_health(value: int):
+	SignalBus.health_changed.emit(value - health, self)
+	
 	health = value
-	SignalBus.health_changed.emit(health, self)
 	if health <= 0:
 		SignalBus.health_depleted.emit(self)
 		

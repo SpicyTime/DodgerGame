@@ -9,6 +9,7 @@ radius = 32.0984
 radius = 82.6372
 
 [node name="Pickup" type="RigidBody2D"]
+lock_rotation = true
 script = ExtResource("1_0pywb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd0rx1ebkxlyc"]
+[gd_scene load_steps=3 format=3 uid="uid://cd0rx1ebkxlyc"]
 
 [ext_resource type="Script" uid="uid://styorydcw2fk" path="res://Weapons/gun.gd" id="1_qgdr8"]
+[ext_resource type="AudioStream" uid="uid://ddidj3q36osd0" path="res://Assets/Audio/SFX/shootsound.mp3" id="2_qgdr8"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_qgdr8")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -24)
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_qgdr8")
+bus = &"SFX"
