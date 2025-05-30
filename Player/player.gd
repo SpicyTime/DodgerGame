@@ -7,9 +7,10 @@ extends CharacterBody2D
 
 var gravity: float = 9.8
 var powerups = []
-var bullets: int = 500
+var bullets: int = 25
 var gun_flipped 
 var coin_count: int = 0
+var hurt_sound = preload(Constants.SFX_FOLDER_PATH + "Hurt.mp3")
 func add_health(amount):
 	powerups.append(Constants.PowerupType.HEALTH)
 	health.set_max_health(health.max_health + amount)
@@ -59,9 +60,10 @@ func _physics_process(delta: float) -> void:
 func _on_health_changed(diff, node):
 	if node == $Health:
 		if diff < 0:
-			$HurtSFX.play()
+			AudioManager.play_sfx(hurt_sound,"SFX", 7.0)
 func _on_health_depleted(health_object):
 	if health_object == $Health:
+		AudioManager.play_sfx(hurt_sound, "SFX", 10.0)
 		queue_free()
 		SignalBus.player_dead.emit()
  		

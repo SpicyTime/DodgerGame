@@ -8,7 +8,7 @@ var speed: float = 400
 var size: Constants.FallingObjectSize = Constants.FallingObjectSize.SMALL
 var pickup: Pickup = null
 
-
+var destroy_sound: AudioStream = preload("res://Assets/Audio/SFX/ObjectExplosion.mp3")
 var item_spawn_chances = {
 	Constants.FallingObjectSize.LARGE: 0.3,
 	Constants.FallingObjectSize.MEDIUM: 0.1,
@@ -130,7 +130,8 @@ func _on_despawn_timer_timeout() -> void:
 	
 func _on_health_depleted(health_object: Health):
 	if health_object == $Health:
-		GameManager.set_score(GameManager.score + 1)
+		GameManager.set_destroyed_objects(GameManager.objects_destroyed + 1)
 		if pickup:
 			drop_pickup()
+		AudioManager.play_sfx(destroy_sound, "SFX", 5.0)
 		queue_free()

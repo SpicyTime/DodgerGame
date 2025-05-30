@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SignalBus="*res://Autoloads/signal_bus.gd"
 GameManager="*res://Game/game_manager.gd"
 Constants="*res://Autoloads/constants.gd"
+AudioManager="*res://audio_manager.gd"
 
 [display]
 

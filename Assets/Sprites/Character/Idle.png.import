@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qjmryly4bg2u"
-path="res://.godot/imported/ShieldBubble.png-592991dd68b30079cd946db0b4290edf.ctex"
+uid="uid://br16b475hf82f"
+path="res://.godot/imported/Idle.png-57dce77b4c517569f6e5f023b519f9b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/ShieldBubble.png"
-dest_files=["res://.godot/imported/ShieldBubble.png-592991dd68b30079cd946db0b4290edf.ctex"]
+source_file="res://Assets/Sprites/Character/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-57dce77b4c517569f6e5f023b519f9b6.ctex"]
 
 [params]
 

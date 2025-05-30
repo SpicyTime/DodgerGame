@@ -31,7 +31,7 @@ func spawn_object():
 	
 	var rand = randf()
 	var object = null
-	if rand < 0.06:
+	if rand < 0.01:
 		object = load("res://Pickups/ammo_box.tscn").instantiate()
 		
 	else:

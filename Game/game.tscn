@@ -1,45 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://hkjlg3h4v7t6"]
+[gd_scene load_steps=7 format=3 uid="uid://hkjlg3h4v7t6"]
 
 [ext_resource type="PackedScene" uid="uid://ddpf73hwjtrgw" path="res://Player/player.tscn" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://b50usrvsoxxev" path="res://Hazards/object_spawner.tscn" id="2_1r4le"]
 [ext_resource type="PackedScene" uid="uid://dlfc6lg53fx7n" path="res://GUI/title_screen.tscn" id="3_7raqb"]
 [ext_resource type="AudioStream" uid="uid://davxbg2my1147" path="res://Assets/Audio/Music/Music_Loop_3_Full.wav" id="4_jcm6v"]
+[ext_resource type="Texture2D" uid="uid://bcpe3doifxhok" path="res://Assets/Sprites/Background.png" id="5_fwxkx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_80nbo"]
 distance = -11.0
 
 [node name="Game" type="Node2D"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_fwxkx")
+
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
-position = Vector2(163, 214)
+position = Vector2(160, 280)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(-3, 310)
+position = Vector2(0, 320)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("WorldBoundaryShape2D_80nbo")
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
-position = Vector2(-564, 173)
+position = Vector2(-632, 176)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource("WorldBoundaryShape2D_80nbo")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(565, 169)
+position = Vector2(632, 160)
 rotation = 4.71239
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource("WorldBoundaryShape2D_80nbo")
 
 [node name="TitleScreen" parent="." instance=ExtResource("3_7raqb")]
-offset_left = -572.0
-offset_top = -322.0
-offset_right = 574.0
-offset_bottom = 323.0
+offset_left = -573.0
+offset_top = -308.0
+offset_right = 573.0
+offset_bottom = 337.0
 
 [node name="ObjectSpawners" type="Node" parent="."]
 

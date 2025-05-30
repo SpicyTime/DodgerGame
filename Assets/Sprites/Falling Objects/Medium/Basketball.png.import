@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvno231f2duir"
-path="res://.godot/imported/CoinGold.png-5eff6cc84c2e2362c627302e66ef40e5.ctex"
+uid="uid://j7rs70ev14n5"
+path="res://.godot/imported/Basketball.png-6449cc3290d28169d3f2535b54a6b53d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/CoinGold.png"
-dest_files=["res://.godot/imported/CoinGold.png-5eff6cc84c2e2362c627302e66ef40e5.ctex"]
+source_file="res://Assets/Sprites/Falling Objects/Medium/Basketball.png"
+dest_files=["res://.godot/imported/Basketball.png-6449cc3290d28169d3f2535b54a6b53d.ctex"]
 
 [params]
 

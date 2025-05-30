@@ -1,13 +1,13 @@
 extends Node
-var score: int = 0 : set = set_score
+var objects_destroyed: int = 0 : set = set_destroyed_objects
 var game_time: float = 0
 var is_paused = true
 var object_fall_speed = 350
 var current_difficulty = 0
 var threshold = 10
-func set_score(new_score):
-	score = new_score
-	SignalBus.score_changed.emit(score)
+func set_destroyed_objects(new_count):
+	objects_destroyed = new_count
+	SignalBus.score_changed.emit()
 	
 func start_game():
 	 
@@ -43,6 +43,8 @@ func _on_player_death() -> void:
 	game.add_child(death_screen)
 	var score_label: Label = death_screen.get_node("VBoxContainer/FinalScoreLabel")
 	var time_label: Label = death_screen.get_node("VBoxContainer/TimeLabel")
+	var score  = (objects_destroyed * 100) + roundi(game_time / 10) * 10 
 	
+	print(score)
 	score_label.text = "Score: " + str(score)
 	time_label.text = "Time Survived: " + str(snapped(game_time, 0.001))
