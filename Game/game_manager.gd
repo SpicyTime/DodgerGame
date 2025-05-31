@@ -10,10 +10,11 @@ func set_destroyed_objects(new_count):
 	SignalBus.score_changed.emit()
 	
 func start_game():
-	 
 	var game = get_tree().root.get_node("Game") 
 	var title_screen = game.find_child("TitleScreen")
 	game.remove_child(title_screen)
+	var hud = game.find_child("Hud")
+	hud.visible = true
 func reset_game():
 	get_tree().reload_current_scene()
 	 
