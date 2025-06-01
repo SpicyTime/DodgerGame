@@ -1,11 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddpf73hwjtrgw"]
+[gd_scene load_steps=16 format=3 uid="uid://ddpf73hwjtrgw"]
 
 [ext_resource type="Script" uid="uid://d2bjmjcqjwx7f" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://br16b475hf82f" path="res://Assets/Sprites/Character/Idle.png" id="2_fhl08"]
 [ext_resource type="Texture2D" uid="uid://gvk58ei2jpfr" path="res://Assets/Sprites/Character/Walk.png" id="2_k53q1"]
+[ext_resource type="Shader" uid="uid://c44bpe5oc7nty" path="res://Player/hurt.gdshader" id="2_vtle1"]
 [ext_resource type="Script" uid="uid://d1fapdy7cnpeu" path="res://Health System/health.gd" id="4_k53q1"]
 [ext_resource type="PackedScene" uid="uid://d3yrxgpxob382" path="res://Health System/hurt_box.tscn" id="5_fhl08"]
 [ext_resource type="PackedScene" uid="uid://cd0rx1ebkxlyc" path="res://Weapons/gun.tscn" id="5_k53q1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_od3ui"]
+shader = ExtResource("2_vtle1")
+shader_parameter/effect_enabled = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtle1"]
 atlas = ExtResource("2_k53q1")
@@ -63,13 +68,16 @@ scale = Vector2(0.666, 0.666)
 script = ExtResource("1_4ntmi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_od3ui")
 sprite_frames = SubResource("SpriteFrames_x3vf3")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_k53q1")
 
 [node name="Gun" parent="." instance=ExtResource("5_k53q1")]
+visible = false
 position = Vector2(-24, -72)
 
 [node name="Health" type="Node" parent="."]
@@ -79,9 +87,11 @@ max_health = 3
 metadata/_custom_type_script = "uid://d1fapdy7cnpeu"
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_fhl08")]
+visible = false
 collision_mask = 2
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 position = Vector2(0, 6.006)
 shape = SubResource("RectangleShape2D_fhl08")

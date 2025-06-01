@@ -7,7 +7,6 @@ func update_hearts(max_health: int,  current_health: int):
 		if heart:
 			heart.visible = i < current_health 
 func _ready() -> void:
- 
 	SignalBus.health_changed.connect(_on_health_changed)
 	for i in range(3):
 		var heart := TextureRect.new()
@@ -17,7 +16,6 @@ func _ready() -> void:
 		
 func _on_health_changed(diff: int, health_node: Health):
 	if health_node.get_parent() is Player:
-		print(health_node.health)
 		update_hearts(health_node.max_health, health_node.health)
  
  

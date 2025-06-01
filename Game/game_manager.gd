@@ -46,6 +46,5 @@ func _on_player_death() -> void:
 	var time_label: Label = death_screen.get_node("VBoxContainer/TimeLabel")
 	var score  = (objects_destroyed * 100) + roundi(game_time / 10) * 10 
 	
-	print(score)
 	score_label.text = "Score: " + str(score)
 	time_label.text = "Time Survived: " + str(snapped(game_time, 0.001))

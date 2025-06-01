@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm6p8xmebv643"]
+
+[ext_resource type="Material" uid="uid://dcq3v0ugtea22" path="res://Hazards/destroy_particles.tres" id="1_wxail"]
+
+[node name="DestroyParticles" type="GPUParticles2D"]
+emitting = false
+amount = 30
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("1_wxail")

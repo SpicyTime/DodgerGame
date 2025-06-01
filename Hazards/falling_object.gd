@@ -107,6 +107,52 @@ func set_up_object():
 	texture = choose_object_texture()
 	create_collider()
 	set_health_and_hit()
+	 
+func _get_all_colors(image: Image) -> Array:
+	var color_set := {}  # Use a dictionary as a set
+	var color_list := []
+
+	for x in range(image.get_width()):
+		for y in range(image.get_height()):
+			var color = image.get_pixel(x, y)
+
+			# Round to reduce precision noise
+			var rounded = Color(
+				round(color.r * 255.0) / 255.0,
+				round(color.g * 255.0) / 255.0,
+				round(color.b * 255.0) / 255.0,
+				round(color.a * 255.0) / 255.0
+			)
+
+			if rounded.a < 0.05:
+				continue  # Skip mostly transparent pixels
+
+			# Serialize color to string to ensure uniqueness
+			var key = str(rounded)
+			if not color_set.has(key):
+				color_set[key] = rounded
+				color_list.append(rounded)
+
+	# Optional: Sort by brightness (or any criteria)
+	color_list.sort_custom(sort_by_value)
+
+	return color_list
+
+
+func sort_by_value(a: Color, b: Color):
+	return a.v < b.v
+
+
+
+func _apply_sprite_color_to_particles(particles: GPUParticles2D):
+	var color_list = _get_all_colors(texture.get_image())
+	var gradient := Gradient.new()
+	for i in range(color_list.size()):
+		gradient.add_point( i / float(color_list.size() - 1), color_list[i])
+	var ramp := GradientTexture1D.new()
+	ramp.gradient = gradient
+	var base_material := particles.process_material as ParticleProcessMaterial
+	base_material.color_ramp = ramp
 func _ready() -> void:
 	SignalBus.health_depleted.connect(_on_health_depleted)
 	 
@@ -120,11 +166,11 @@ func _ready() -> void:
 			pickup = load("res://Pickups/ammo_box.tscn").instantiate()
 		else:
 			pickup = load("res://Pickups/coin.tscn").instantiate()
-			
+	
 func _physics_process(delta: float) -> void:
 	position.y += speed * delta
 	rotation += .015
-
+	
 func _on_despawn_timer_timeout() -> void:
 	queue_free()
 	
@@ -134,4 +180,9 @@ func _on_health_depleted(health_object: Health):
 		if pickup:
 			drop_pickup()
 		AudioManager.play_sfx(destroy_sound, "SFX", 5.0)
+		var particles = load("res://Hazards/destroy_particles.tscn").instantiate()
+		particles.global_position = global_position
+		particles.emitting = true
+		_apply_sprite_color_to_particles(particles)
+		get_tree().root.get_node("Game").add_child(particles)
 		queue_free()
